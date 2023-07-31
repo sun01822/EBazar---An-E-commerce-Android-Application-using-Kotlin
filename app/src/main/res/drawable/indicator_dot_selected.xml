@@ -1,0 +1,8 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <solid android:color="#FF0000" /> <!-- Change the color to your desired selected color -->
+    <size android:width="12dp"
+        android:height="12dp" /> <!-- Change the size to your desired selected dot size -->
+
+</shape>
