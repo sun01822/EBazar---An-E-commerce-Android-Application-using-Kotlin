@@ -2,15 +2,17 @@ package com.sun.emarket.fragments
 
 // CategoriesFragment.kt
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ProgressBar
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sun.emarket.R
 import com.sun.emarket.adapter.CategoryAdapter
@@ -33,13 +35,17 @@ class CategoriesFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_categories, container, false)
 
         recyclerView = rootView.findViewById(R.id.categoryRecyclerView)
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         categoryAdapter = CategoryAdapter(requireActivity().supportFragmentManager)
         recyclerView.adapter = categoryAdapter
 
+
         progressBar = rootView.findViewById(R.id.progressBar)
         categoryContainer = rootView.findViewById(R.id.categoryContainer)
+
+        val customColor = ContextCompat.getColor(requireContext(), R.color.colorCategory1)
+        progressBar.indeterminateTintList = ColorStateList.valueOf(customColor)
 
         // Fetch categories from the API
         val apiService = FakeApiService.create()

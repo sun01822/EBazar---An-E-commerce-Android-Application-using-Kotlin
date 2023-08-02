@@ -2,6 +2,7 @@ package com.sun.emarket.adapter
 
 // CategoryAdapter.kt
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ import com.sun.emarket.fragments.categories.WomensClothingFragment
 
 class CategoryAdapter(private val fragmentManager: FragmentManager) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
     private var categoryList: List<String> = emptyList()
+    private var defaultSelectedPosition: Int = 0
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(categories: List<String>) {
@@ -62,8 +64,14 @@ class CategoryAdapter(private val fragmentManager: FragmentManager) : RecyclerVi
                 "men's clothing" -> MensClothingFragment()
                 "women's clothing" -> WomensClothingFragment()
                 // Add more categories and corresponding fragments as needed
-                else -> ElectronicsFragment()
+                else -> {
+                    ElectronicsFragment()
+                }
             }
+
+            val bundle = Bundle()
+            bundle.putString("category", category)
+            fragment.arguments = bundle
 
             // Perform fragment transaction to navigate to the selected fragment
             val transaction: FragmentTransaction = fragmentManager.beginTransaction()
@@ -78,6 +86,11 @@ class CategoryAdapter(private val fragmentManager: FragmentManager) : RecyclerVi
             val colors = itemView.resources.getIntArray(R.array.category_item_colors)
             val colorIndex = adapterPosition % colors.size
             categoryCardView.setCardBackgroundColor(colors[colorIndex])
+
+            if (adapterPosition == defaultSelectedPosition) {
+                // Perform the navigation for the default selected position
+                navigateToFragment(categoryList[defaultSelectedPosition])
+            }
         }
     }
 }
