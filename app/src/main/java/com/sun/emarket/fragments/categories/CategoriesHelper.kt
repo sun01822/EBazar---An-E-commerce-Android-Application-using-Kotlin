@@ -5,7 +5,7 @@ import android.content.res.ColorStateList
 import android.view.View
 import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sun.emarket.R
 import com.sun.emarket.adapter.ProductAdapter
@@ -19,7 +19,7 @@ class CategoriesHelper {
     companion object {
         private lateinit var productAdapter: ProductAdapter
         fun fetchData(category: String, recyclerView: RecyclerView, progressBar: ProgressBar, context: Context){
-            recyclerView.layoutManager = GridLayoutManager(context, 2)
+            recyclerView.layoutManager = LinearLayoutManager(context)
 
             productAdapter = ProductAdapter()
             recyclerView.adapter = productAdapter

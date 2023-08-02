@@ -23,12 +23,12 @@ import com.sun.emarket.fragments.categories.WomensClothingFragment
 class CategoryAdapter(private val fragmentManager: FragmentManager) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
     private var categoryList: List<String> = emptyList()
     private var selectedPosition: Int = 0
-    private var defaultSelectedPosition : Int = 0
+    private var defaultSelectedPosition: Int = 0
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(categories: List<String>) {
         categoryList = categories
-        selectedPosition = 0 // Set the default selected position to 0
+        selectedPosition = defaultSelectedPosition
         notifyDataSetChanged()
     }
 
@@ -85,9 +85,7 @@ class CategoryAdapter(private val fragmentManager: FragmentManager) : RecyclerVi
                 "men's clothing" -> MensClothingFragment()
                 "women's clothing" -> WomensClothingFragment()
                 // Add more categories and corresponding fragments as needed
-                else -> {
-                    ElectronicsFragment()
-                }
+                else -> ElectronicsFragment()
             }
 
             val bundle = Bundle()
@@ -108,15 +106,18 @@ class CategoryAdapter(private val fragmentManager: FragmentManager) : RecyclerVi
             val colors = itemView.resources.getIntArray(R.array.category_item_colors)
             val colorIndex = position % colors.size
             categoryCardView.setCardBackgroundColor(colors[colorIndex])
-            if (adapterPosition == defaultSelectedPosition) {
-                // Perform the navigation for the default selected position
-                navigateToFragment(categoryList[defaultSelectedPosition])
-            }
+
             // Check if the current position is the selected position
             if (position == selectedPosition) {
                 categoryCardView.setCardBackgroundColor(itemView.context.getColor(R.color.black))
             } else {
                 categoryCardView.setCardBackgroundColor(colors[colorIndex])
+            }
+
+            // Check if the selected position is still the default value
+            if (selectedPosition == defaultSelectedPosition) {
+                // Navigate to the default fragment and pass the default value as "electronics"
+                navigateToFragment("electronics")
             }
         }
     }
