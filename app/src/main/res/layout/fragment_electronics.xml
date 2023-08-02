@@ -17,11 +17,8 @@
         android:id="@+id/productRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp"
+        android:padding="5dp"
         android:clipToPadding="false"
-        android:numColumns="2"
-        android:verticalSpacing="8dp"
-        android:horizontalSpacing="8dp"
         tools:listitem="@layout/item_product"
         android:scrollbars="vertical" />
 
